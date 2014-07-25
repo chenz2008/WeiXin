@@ -10,8 +10,10 @@ namespace WeiXin.Core
         void Error(string format, params object[] objs);
     }
 
+    /******************************************************************************/
+
     public interface IWeiXinService
     {
-        string Process(XmlMessageType rmt, XmlMessage msg);
+        string Process(XmlReceiveMessageType receiveMsgType, XmlReceiveMessage receiveMsg);
     }
 }

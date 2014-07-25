@@ -6,11 +6,12 @@ namespace WeiXin.Core
     {
         public static ILogger Logger { get; set; }
 
+        public static LogLevel Level = LogLevel.None;
+
         static Log()
         {
             Logger = null;
         }
-        public static LogLevel Level = LogLevel.None;
 
         public static void Debug(string format, params object[] objs)
         {
@@ -56,6 +57,8 @@ namespace WeiXin.Core
             }
         }
     }
+
+    /******************************************************************************/
 
     public enum LogLevel
     {

@@ -1,8 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
-using System.Security.Cryptography;
-using System.Text;
 using System.Web;
 using WeiXin.Core;
 using WeiXin.Core.Messages;
@@ -19,46 +18,89 @@ namespace Samples
     // 步骤1
     public class ProcessMessage : IWeiXinService
     {
-        public string Process(XmlMessageType rmt, XmlMessage msg)
+        /// <summary>
+        /// 处理消息的接口，如果回复被动消息，直接回复 xml 格式的消息即可。
+        /// 如果不处理或者发送客服消息等直接回复空字符串即可。
+        /// </summary>
+        /// <param name="receiveMsgType"></param>
+        /// <param name="receiveMsg"></param>
+        /// <returns></returns>
+        public string Process(XmlReceiveMessageType receiveMsgType, XmlReceiveMessage receiveMsg)
         {
             string result = string.Empty;
-            if (msg != null)
+            if (receiveMsg != null)
             {
                 // 消息类型
-                switch (rmt)
+                switch (receiveMsgType)
                 {
-                    case XmlMessageType.Undefined:                          // 未识别出消息类型
+                    case XmlReceiveMessageType.Undefined:                          // 未识别出消息类型
                         break;
-                    case XmlMessageType.Text:                               // 文本消息
+                    case XmlReceiveMessageType.Text:                               // 文本消息
                         break;
-                    case XmlMessageType.Image:                              // 图片消息
+                    case XmlReceiveMessageType.Image:                              // 图片消息
                         break;
-                    case XmlMessageType.Voice:                              // 语音消息
+                    case XmlReceiveMessageType.Voice:                              // 语音消息
                         break;
-                    case XmlMessageType.Video:                              // 视频消息
+                    case XmlReceiveMessageType.Video:                              // 视频消息
                         break;
-                    case XmlMessageType.Location:                           // 地理位置消息
+                    case XmlReceiveMessageType.Location:                           // 地理位置消息
                         break;
-                    case XmlMessageType.Link:                               // 链接消息
+                    case XmlReceiveMessageType.Link:                               // 链接消息
                         break;
-                    case XmlMessageType.Event_QRCode_Subscribe:             // 用户未关注时扫描二维码事件
+                    case XmlReceiveMessageType.Event_QRCode_Subscribe:             // 用户未关注时扫描二维码事件
                         break;
-                    case XmlMessageType.Event_QRCode_Scan:                  // 用户已关注时扫描二维码事件
+                    case XmlReceiveMessageType.Event_QRCode_Scan:                  // 用户已关注时扫描二维码事件
                         break;
-                    case XmlMessageType.Event_View:                         // 点击菜单跳转链接时事件
+                    case XmlReceiveMessageType.Event_View:                         // 点击菜单跳转链接时事件
                         break;
-                    case XmlMessageType.Event_Click:                        // 点击菜单拉取消息时事件
+                    case XmlReceiveMessageType.Event_Click:                        // 点击菜单拉取消息时事件
+                        result = EventClickAction(receiveMsg);
                         break;
-                    case XmlMessageType.Event_Location:                     // 上报地理位置时事件
-                        //result = MessageManager.CreateTextMessageXml(receiveMsg.Xml, string.Format("您的地理位置纬度：{0}，经度：{1}，精度：{2}", eventMsg.Latitude, eventMsg.Longitude, eventMsg.Precision));
+                    case XmlReceiveMessageType.Event_Location:                     // 上报地理位置时事件
+                        result = EventLocationAction(receiveMsg);
                         break;
-                    case XmlMessageType.Event_Subscribe:                    // 关注事件
+                    case XmlReceiveMessageType.Event_Subscribe:                    // 关注事件
                         break;
-                    case XmlMessageType.Event_UnSubscribe:                  // 取消关注事件
+                    case XmlReceiveMessageType.Event_UnSubscribe:                  // 取消关注事件
                         break;
                     default:
                         break;
                 }
+            }
+            return result;
+        }
+
+        string EventLocationAction(XmlReceiveMessage receiveMsg)
+        {
+            var result = string.Empty;
+            var eventMsg = receiveMsg as XmlReceiveEventMessage;
+            var article = new List<XmlSendArticle>();
+            article.Add(new XmlSendArticle { Title = "你的地理位置信息", Description = string.Format("纬度：{0}\r\n\r\n经度：{1}\r\n\r\n精度：{2}", eventMsg.Latitude, eventMsg.Longitude, eventMsg.Precision), Url = "http://www.wangwenzhuang.com/" });
+            result = WeiXinService.CreateToXmlNewsMessageXml(receiveMsg, article);
+            return result;
+        }
+
+        string EventClickAction(XmlReceiveMessage receiveMsg)
+        {
+            var result = string.Empty;
+            var eventMsg = receiveMsg as XmlReceiveEventMessage;
+            if (eventMsg.EventKey.Equals("1"))
+            {
+                result = WeiXinService.CreateToXmlTextMessageXml(receiveMsg, "被动文本消息");
+            }
+            else if (eventMsg.EventKey == "2")
+            {
+                var article = new List<XmlSendArticle>();
+                article.Add(new XmlSendArticle { Title = "被动单图文消息", Description = "被动单图文消息，此处省略一万字。。。", PicUrl = "http://h.hiphotos.baidu.com/image/pic/item/c9fcc3cec3fdfc037d970d53d63f8794a5c2266a.jpg", Url = "http://www.wangwenzhuang.com/" });
+                result = WeiXinService.CreateToXmlNewsMessageXml(receiveMsg, article);
+            }
+            else if (eventMsg.EventKey == "3")
+            {
+                var article = new List<XmlSendArticle>();
+                article.Add(new XmlSendArticle { Title = "被动多图文消息1", Description = "被动多图文消息，此处省略一万字。。。", PicUrl = "http://h.hiphotos.baidu.com/image/pic/item/c9fcc3cec3fdfc037d970d53d63f8794a5c2266a.jpg", Url = "http://www.wangwenzhuang.com/" });
+                article.Add(new XmlSendArticle { Title = "被动多图文消息2", Description = "被动多图文消息，此处省略一万字。。。", PicUrl = "http://g.hiphotos.baidu.com/image/pic/item/55e736d12f2eb93895023c7fd7628535e4dd6fcb.jpg", Url = "http://www.wangwenzhuang.com/" });
+                article.Add(new XmlSendArticle { Title = "被动多图文消息3", Description = "被动多图文消息，此处省略一万字。。。", PicUrl = "http://e.hiphotos.baidu.com/image/pic/item/63d0f703918fa0ec8426f0f7249759ee3c6ddb63.jpg", Url = "http://www.wangwenzhuang.com/" });
+                result = WeiXinService.CreateToXmlNewsMessageXml(receiveMsg, article);
             }
             return result;
         }
@@ -126,7 +168,7 @@ namespace Samples
 
             Log.Logger = new Logger();
             // 设置日记级别
-            Log.Level = LogLevel.Info;
+            Log.Level = LogLevel.Debug;
         }
         public void ProcessRequest(HttpContext context)
         {
@@ -134,7 +176,8 @@ namespace Samples
             string signature = HttpContext.Current.Request.QueryString["signature"];
             string timestamp = HttpContext.Current.Request.QueryString["timestamp"];
             string nonce = HttpContext.Current.Request.QueryString["nonce"];
-            if (CheckSignature(WeiXinConfig.Token, signature, timestamp, nonce))
+            // 验证签名
+            if (WeiXinService.CheckSignature(WeiXinConfig.Token, signature, timestamp, nonce))
             {
                 var writeMsg = string.Empty;
                 if ("post".Equals(context.Request.HttpMethod.ToLower()))
@@ -153,27 +196,6 @@ namespace Samples
                 HttpContext.Current.Response.Write(writeMsg);
                 HttpContext.Current.Response.End();
             }
-        }
-
-        public bool CheckSignature(
-            string token,
-            string signature,
-            string timestamp,
-            string nonce)
-        {
-            string[] array = { token, timestamp, nonce };
-            Array.Sort(array);
-            string tmpStr = string.Empty;
-            foreach (var tmp in array)
-            {
-                tmpStr += tmp;
-            }
-            tmpStr = BitConverter.ToString(
-                new SHA1CryptoServiceProvider()
-                .ComputeHash(new ASCIIEncoding().GetBytes(tmpStr)))
-                .Replace("-", string.Empty)
-                .ToLower();
-            return tmpStr.Equals(signature);
         }
 
         public bool IsReusable

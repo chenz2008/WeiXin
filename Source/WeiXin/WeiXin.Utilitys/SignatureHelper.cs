@@ -43,7 +43,7 @@ namespace WeiXin.Utilitys
         /// 创建9位随机数
         /// </summary>
         /// <returns></returns>
-        public static string CreateRandomNumber()
+        private static string CreateRandomNumber()
         {
             return new Random().Next(100000000, 999999999).ToString();
         }

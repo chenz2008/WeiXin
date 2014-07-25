@@ -3,30 +3,16 @@
 namespace WeiXin.Core
 {
     /// <summary>
-    /// 用于描述 xml 消息中属性是否是发送被动消息的必要属性
+    /// 消息属性名称
     /// </summary>
     [AttributeUsage(AttributeTargets.Property)]
-    internal class PassiveMessagePropertyAttribute : Attribute
+    internal class MessagePropertyNameAttribute : Attribute
     {
-        internal PassiveMessagePropertyAttribute(bool isRequired)
+        internal MessagePropertyNameAttribute(string propertyName)
         {
-            this.IsRequired = isRequired;
+            this.PropertyName = propertyName;
         }
 
-        internal bool IsRequired { get; set; }
-    }
-
-    /// <summary>
-    /// 用于描述 xml 消息中属性包含子节点
-    /// </summary>
-    [AttributeUsage(AttributeTargets.Property)]
-    internal class HaveChildAttribute : Attribute
-    {
-        internal HaveChildAttribute(bool isChild)
-        {
-            this.IsChild = isChild;
-        }
-
-        internal bool IsChild { get; set; }
+        internal string PropertyName { get; set; }
     }
 }

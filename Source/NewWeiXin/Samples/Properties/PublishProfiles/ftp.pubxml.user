@@ -6,21 +6,21 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAosd/lOhctkWVJ9oD4k62/wAAAAACAAAAAAAQZgAAAAEAACAAAADjGASxcENozqr7cLt3YMjTq4jDoHEIf/ncVlVmko0uCwAAAAAOgAAAAAIAACAAAABBpCsZJywAj00LgpYJEC/RkSW76or3IOZJu/A4GkyTVhAAAACw9thjDY6VXR602mxu9pyrQAAAAElVmqvmXVV5aIajSCFtnH0HP+FQKvNqvDkEz9d8tLNILxTHj/iYYsTUrxQNdjt3Ddr7Wv3SaRXsUWqPp+k1ugs=</EncryptedPassword>
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAFha5tZsJwUe/AcbUsrqqlQAAAAACAAAAAAAQZgAAAAEAACAAAACeJa4I9fx47zEQCm85ZZwhVBwrlp7vHc8wRElSnuNogQAAAAAOgAAAAAIAACAAAADuQqr48dRxgnFWrCdnrTghHSWBEGGjxHCy+Hhg9sGEHBAAAABHrHMy1wnnMvlxttDRTfrMQAAAAPRGTDoqh+f5oQzx69I3u7WQ6TqOTF/kvMU//jEMOPr5w2Y/DyOKA7yrUtWZz0a3Wlu5EdDXylVeU4eJukCxO+Y=</EncryptedPassword>
     <_PublishTargetUrl>ftp://58.215.139.6/weixin/test/api</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/Samples.dll">
-      <publishTime>07/25/2014 18:30:01</publishTime>
+      <publishTime>07/26/2014 01:37:15</publishTime>
     </File>
     <File Include="bin/WeiXin.Core.dll">
-      <publishTime>07/25/2014 18:30:01</publishTime>
+      <publishTime>07/26/2014 01:23:41</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>07/25/2014 18:09:40</publishTime>
+      <publishTime>07/25/2014 22:49:40</publishTime>
     </File>
     <File Include="WeiXin.ashx">
-      <publishTime>07/25/2014 14:42:23</publishTime>
+      <publishTime>07/25/2014 20:38:33</publishTime>
     </File>
   </ItemGroup>
 </Project>

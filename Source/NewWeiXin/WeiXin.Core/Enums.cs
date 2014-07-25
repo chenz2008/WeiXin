@@ -1,7 +1,10 @@
 ﻿
 namespace WeiXin.Core
 {
-    public enum XmlMessageType
+    /// <summary>
+    /// 接收 xml 格式消息类型
+    /// </summary>
+    public enum XmlReceiveMessageType
     {
         /// <summary>
         /// 未定义

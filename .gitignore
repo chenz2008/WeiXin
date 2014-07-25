@@ -32,3 +32,11 @@ Source/WeiXin/WeiXin.Web/obj
 Source/WeiXin/WeiXin.v12.suo
 Source/WeiXin/WeiXin/Properties/PublishProfiles
 Source/WeiXin/WeiXin.Web/Properties/PublishProfiles
+Source/NewWeiXin/Samples/bin
+Source/NewWeiXin/Samples/obj
+Source/NewWeiXin/Test/bin
+Source/NewWeiXin/Test/obj
+Source/NewWeiXin/TestResults
+Source/NewWeiXin/WeiXin.Core/bin
+Source/NewWeiXin/WeiXin.Core/obj
+Source/NewWeiXin/WeiXin.Core.v12.suo
