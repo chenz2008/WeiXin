@@ -25,7 +25,7 @@ namespace Samples
         /// <param name="receiveMsgType"></param>
         /// <param name="receiveMsg"></param>
         /// <returns></returns>
-        public string Process(XmlReceiveMessageType receiveMsgType, XmlReceiveMessage receiveMsg)
+        public string Process(ReceiveXmlMessageType receiveMsgType, ReceiveXmlMessage receiveMsg)
         {
             string result = string.Empty;
             if (receiveMsg != null)
@@ -33,35 +33,35 @@ namespace Samples
                 // 消息类型
                 switch (receiveMsgType)
                 {
-                    case XmlReceiveMessageType.Undefined:                          // 未识别出消息类型
+                    case ReceiveXmlMessageType.Undefined:                          // 未识别出消息类型
                         break;
-                    case XmlReceiveMessageType.Text:                               // 文本消息
+                    case ReceiveXmlMessageType.Text:                               // 文本消息
                         break;
-                    case XmlReceiveMessageType.Image:                              // 图片消息
+                    case ReceiveXmlMessageType.Image:                              // 图片消息
                         break;
-                    case XmlReceiveMessageType.Voice:                              // 语音消息
+                    case ReceiveXmlMessageType.Voice:                              // 语音消息
                         break;
-                    case XmlReceiveMessageType.Video:                              // 视频消息
+                    case ReceiveXmlMessageType.Video:                              // 视频消息
                         break;
-                    case XmlReceiveMessageType.Location:                           // 地理位置消息
+                    case ReceiveXmlMessageType.Location:                           // 地理位置消息
                         break;
-                    case XmlReceiveMessageType.Link:                               // 链接消息
+                    case ReceiveXmlMessageType.Link:                               // 链接消息
                         break;
-                    case XmlReceiveMessageType.Event_QRCode_Subscribe:             // 用户未关注时扫描二维码事件
+                    case ReceiveXmlMessageType.Event_QRCode_Subscribe:             // 用户未关注时扫描二维码事件
                         break;
-                    case XmlReceiveMessageType.Event_QRCode_Scan:                  // 用户已关注时扫描二维码事件
+                    case ReceiveXmlMessageType.Event_QRCode_Scan:                  // 用户已关注时扫描二维码事件
                         break;
-                    case XmlReceiveMessageType.Event_View:                         // 点击菜单跳转链接时事件
+                    case ReceiveXmlMessageType.Event_View:                         // 点击菜单跳转链接时事件
                         break;
-                    case XmlReceiveMessageType.Event_Click:                        // 点击菜单拉取消息时事件
+                    case ReceiveXmlMessageType.Event_Click:                        // 点击菜单拉取消息时事件
                         result = EventClickAction(receiveMsg);
                         break;
-                    case XmlReceiveMessageType.Event_Location:                     // 上报地理位置时事件
+                    case ReceiveXmlMessageType.Event_Location:                     // 上报地理位置时事件
                         result = EventLocationAction(receiveMsg);
                         break;
-                    case XmlReceiveMessageType.Event_Subscribe:                    // 关注事件
+                    case ReceiveXmlMessageType.Event_Subscribe:                    // 关注事件
                         break;
-                    case XmlReceiveMessageType.Event_UnSubscribe:                  // 取消关注事件
+                    case ReceiveXmlMessageType.Event_UnSubscribe:                  // 取消关注事件
                         break;
                     default:
                         break;
@@ -70,36 +70,36 @@ namespace Samples
             return result;
         }
 
-        string EventLocationAction(XmlReceiveMessage receiveMsg)
+        string EventLocationAction(ReceiveXmlMessage receiveMsg)
         {
             var result = string.Empty;
-            var eventMsg = receiveMsg as XmlReceiveEventMessage;
-            var article = new List<XmlSendArticle>();
-            article.Add(new XmlSendArticle { Title = "你的地理位置信息", Description = string.Format("纬度：{0}\r\n\r\n经度：{1}\r\n\r\n精度：{2}", eventMsg.Latitude, eventMsg.Longitude, eventMsg.Precision), Url = "http://www.wangwenzhuang.com/" });
+            var eventMsg = receiveMsg as ReceiveXmlEventMessage;
+            var article = new List<SendXmlArticle>();
+            article.Add(new SendXmlArticle { Title = "你的地理位置信息", Description = string.Format("纬度：{0}\r\n\r\n经度：{1}\r\n\r\n精度：{2}", eventMsg.Latitude, eventMsg.Longitude, eventMsg.Precision), Url = "http://www.wangwenzhuang.com/" });
             result = WeiXinService.CreateToXmlNewsMessageXml(receiveMsg, article);
             return result;
         }
 
-        string EventClickAction(XmlReceiveMessage receiveMsg)
+        string EventClickAction(ReceiveXmlMessage receiveMsg)
         {
             var result = string.Empty;
-            var eventMsg = receiveMsg as XmlReceiveEventMessage;
+            var eventMsg = receiveMsg as ReceiveXmlEventMessage;
             if (eventMsg.EventKey.Equals("1"))
             {
                 result = WeiXinService.CreateToXmlTextMessageXml(receiveMsg, "被动文本消息");
             }
             else if (eventMsg.EventKey == "2")
             {
-                var article = new List<XmlSendArticle>();
-                article.Add(new XmlSendArticle { Title = "被动单图文消息", Description = "被动单图文消息，此处省略一万字。。。", PicUrl = "http://h.hiphotos.baidu.com/image/pic/item/c9fcc3cec3fdfc037d970d53d63f8794a5c2266a.jpg", Url = "http://www.wangwenzhuang.com/" });
+                var article = new List<SendXmlArticle>();
+                article.Add(new SendXmlArticle { Title = "被动单图文消息", Description = "被动单图文消息，此处省略一万字。。。", PicUrl = "http://h.hiphotos.baidu.com/image/pic/item/c9fcc3cec3fdfc037d970d53d63f8794a5c2266a.jpg", Url = "http://www.wangwenzhuang.com/" });
                 result = WeiXinService.CreateToXmlNewsMessageXml(receiveMsg, article);
             }
             else if (eventMsg.EventKey == "3")
             {
-                var article = new List<XmlSendArticle>();
-                article.Add(new XmlSendArticle { Title = "被动多图文消息1", Description = "被动多图文消息，此处省略一万字。。。", PicUrl = "http://h.hiphotos.baidu.com/image/pic/item/c9fcc3cec3fdfc037d970d53d63f8794a5c2266a.jpg", Url = "http://www.wangwenzhuang.com/" });
-                article.Add(new XmlSendArticle { Title = "被动多图文消息2", Description = "被动多图文消息，此处省略一万字。。。", PicUrl = "http://g.hiphotos.baidu.com/image/pic/item/55e736d12f2eb93895023c7fd7628535e4dd6fcb.jpg", Url = "http://www.wangwenzhuang.com/" });
-                article.Add(new XmlSendArticle { Title = "被动多图文消息3", Description = "被动多图文消息，此处省略一万字。。。", PicUrl = "http://e.hiphotos.baidu.com/image/pic/item/63d0f703918fa0ec8426f0f7249759ee3c6ddb63.jpg", Url = "http://www.wangwenzhuang.com/" });
+                var article = new List<SendXmlArticle>();
+                article.Add(new SendXmlArticle { Title = "被动多图文消息1", Description = "被动多图文消息，此处省略一万字。。。", PicUrl = "http://h.hiphotos.baidu.com/image/pic/item/c9fcc3cec3fdfc037d970d53d63f8794a5c2266a.jpg", Url = "http://www.wangwenzhuang.com/" });
+                article.Add(new SendXmlArticle { Title = "被动多图文消息2", Description = "被动多图文消息，此处省略一万字。。。", PicUrl = "http://g.hiphotos.baidu.com/image/pic/item/55e736d12f2eb93895023c7fd7628535e4dd6fcb.jpg", Url = "http://www.wangwenzhuang.com/" });
+                article.Add(new SendXmlArticle { Title = "被动多图文消息3", Description = "被动多图文消息，此处省略一万字。。。", PicUrl = "http://e.hiphotos.baidu.com/image/pic/item/63d0f703918fa0ec8426f0f7249759ee3c6ddb63.jpg", Url = "http://www.wangwenzhuang.com/" });
                 result = WeiXinService.CreateToXmlNewsMessageXml(receiveMsg, article);
             }
             return result;
@@ -164,7 +164,7 @@ namespace Samples
         {
             _Service = new ProcessMessage();
             // 步骤2
-            WeiXinService.Register(_Service);
+            WeiXinService.Register(_Service, WeiXinConfig.AppId, WeiXinConfig.AppSecret);
 
             Log.Logger = new Logger();
             // 设置日记级别
@@ -192,6 +192,11 @@ namespace Samples
                         // 步骤3
                         writeMsg = WeiXinService.ProcessMessage(xml);
                     }
+                }
+                else
+                {
+                    // get 请求是微信服务器验证，原样返回 echoStr 才能通过验证
+                    writeMsg = echoStr;
                 }
                 HttpContext.Current.Response.Write(writeMsg);
                 HttpContext.Current.Response.End();
