@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace WeiXin.Core
 {
-    public sealed class GlobalReturnCode
+    internal sealed class GlobalReturnCode
     {
-        internal readonly static Dictionary<int, string> RETURNCIDEDICTIONARY;
+        readonly static Dictionary<int, string> RETURNCIDEDICTIONARY;
         static GlobalReturnCode()
         {
             RETURNCIDEDICTIONARY = new Dictionary<int, string>();
@@ -14,7 +14,7 @@ namespace WeiXin.Core
             RETURNCIDEDICTIONARY.Add(40001, " 获取access_token时AppSecret错误，或者access_token无效");
             RETURNCIDEDICTIONARY.Add(40002, " 不合法的凭证类型");
             RETURNCIDEDICTIONARY.Add(40003, " 不合法的OpenID");
-            RETURNCIDEDICTIONARY.Add(40004, "	 不合法的媒体文件类型");
+            RETURNCIDEDICTIONARY.Add(40004, "不合法的媒体文件类型");
             RETURNCIDEDICTIONARY.Add(40005, " 不合法的文件类型");
             RETURNCIDEDICTIONARY.Add(40006, " 不合法的文件大小");
             RETURNCIDEDICTIONARY.Add(40007, "不合法的媒体文件id");
@@ -92,7 +92,7 @@ namespace WeiXin.Core
             RETURNCIDEDICTIONARY.Add(48001, "api功能未授权");
             RETURNCIDEDICTIONARY.Add(50001, "用户未授权该api");
         }
-        public static ReturnCode GetReturnCode(string json)
+        internal static ReturnCode GetReturnCode(string json)
         {
             ReturnCode returnCode = new ReturnCode();
             returnCode.Json = json;

@@ -11,16 +11,16 @@
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/Samples.dll">
-      <publishTime>07/26/2014 20:01:44</publishTime>
+      <publishTime>07/28/2014 12:08:01</publishTime>
     </File>
     <File Include="bin/WeiXin.Core.dll">
-      <publishTime>07/26/2014 20:01:43</publishTime>
+      <publishTime>07/28/2014 12:08:01</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>07/25/2014 22:49:40</publishTime>
+      <publishTime>07/28/2014 12:08:12</publishTime>
     </File>
     <File Include="WeiXin.ashx">
-      <publishTime>07/25/2014 20:38:33</publishTime>
+      <publishTime>07/25/2014 14:42:23</publishTime>
     </File>
   </ItemGroup>
 </Project>

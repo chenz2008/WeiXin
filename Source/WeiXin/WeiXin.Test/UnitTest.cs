@@ -10,6 +10,7 @@ namespace WeiXin.Test
         [TestMethod]
         public void TestMethod()
         {
+            System.Console.WriteLine("dddd");
         }
     }
 }

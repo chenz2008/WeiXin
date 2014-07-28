@@ -38,6 +38,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -47,42 +48,46 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\MessagePropertyNameAttribute.cs" />
+    <Compile Include="Core\AccessToken\AccessToken.cs" />
+    <Compile Include="Core\CustomerMessage\CustomerJsonMessage\CustomerJsonNewsMessage.cs" />
+    <Compile Include="Core\CustomerMessage\CustomerJsonMessage\CustomerJsonArticleMessage.cs" />
+    <Compile Include="Core\CustomerMessage\CustomerJsonMessage\CustomerJsonTextMessage.cs" />
+    <Compile Include="Core\CustomerMessage\CustomerJsonMessage\CustomerJsonMessage.cs" />
+    <Compile Include="Core\CustomerMessage\SendCustomerMessage.cs" />
     <Compile Include="Core\GlobalReturnCode\GlobalReturnCode.cs" />
     <Compile Include="Core\GlobalReturnCode\ReturnCode.cs" />
+    <Compile Include="Core\WeiXinService.cs" />
     <Compile Include="Enums\LogLevel.cs" />
     <Compile Include="Enums\XmlReceiveMessageType.cs" />
-    <Compile Include="Interfaces\ILogger.cs" />
     <Compile Include="Interfaces\IWeiXinService.cs" />
-    <Compile Include="Messages\ReceiveXmlMessage\ReceiveXmlEventMessage.cs" />
-    <Compile Include="Messages\ReceiveXmlMessage\ReceiveXmlImageMessage.cs" />
-    <Compile Include="Messages\ReceiveXmlMessage\ReceiveXmlLinkMessage.cs" />
-    <Compile Include="Messages\ReceiveXmlMessage\ReceiveXmlLocationMessage.cs" />
-    <Compile Include="Messages\ReceiveXmlMessage\ReceiveXmlTextMessage.cs" />
-    <Compile Include="Messages\ReceiveXmlMessage\ReceiveXmlVideoMessage.cs" />
-    <Compile Include="Messages\ReceiveXmlMessage\ReceiveXmlVoiceMessage.cs" />
-    <Compile Include="Messages\ReceiveXmlMessage\ReceiveXmlMessage.cs" />
-    <Compile Include="Messages\SendXmlMessage\SendXmlImageMessage.cs" />
-    <Compile Include="Messages\SendXmlMessage\SendXmlTextMessage.cs" />
-    <Compile Include="Messages\SendXmlMessage\SendXmlVideoMessage.cs" />
-    <Compile Include="Messages\SendXmlMessage\SendXmlMusicMessage.cs" />
-    <Compile Include="Messages\SendXmlMessage\SendXmlNewsMessage.cs" />
-    <Compile Include="Messages\SendXmlMessage\SendXmlArticle.cs" />
-    <Compile Include="Messages\SendXmlMessage\SendXmlVoiceMessage.cs" />
-    <Compile Include="Messages\SendXmlMessage\SendXmlMessage.cs" />
+    <Compile Include="Interfaces\ILogger.cs" />
+    <Compile Include="XmlMessages\ReceiveXmlMessage\ReceiveXmlEventMessage.cs" />
+    <Compile Include="XmlMessages\ReceiveXmlMessage\ReceiveXmlImageMessage.cs" />
+    <Compile Include="XmlMessages\ReceiveXmlMessage\ReceiveXmlLinkMessage.cs" />
+    <Compile Include="XmlMessages\ReceiveXmlMessage\ReceiveXmlLocationMessage.cs" />
+    <Compile Include="XmlMessages\ReceiveXmlMessage\ReceiveXmlTextMessage.cs" />
+    <Compile Include="XmlMessages\ReceiveXmlMessage\ReceiveXmlVideoMessage.cs" />
+    <Compile Include="XmlMessages\ReceiveXmlMessage\ReceiveXmlVoiceMessage.cs" />
+    <Compile Include="XmlMessages\ReceiveXmlMessage\ReceiveXmlMessage.cs" />
+    <Compile Include="XmlMessages\SendXmlMessage\SendXmlImageMessage.cs" />
+    <Compile Include="XmlMessages\SendXmlMessage\SendXmlTextMessage.cs" />
+    <Compile Include="XmlMessages\SendXmlMessage\SendXmlVideoMessage.cs" />
+    <Compile Include="XmlMessages\SendXmlMessage\SendXmlMusicMessage.cs" />
+    <Compile Include="XmlMessages\SendXmlMessage\SendXmlNewsMessage.cs" />
+    <Compile Include="XmlMessages\SendXmlMessage\SendXmlArticle.cs" />
+    <Compile Include="XmlMessages\SendXmlMessage\SendXmlVoiceMessage.cs" />
+    <Compile Include="XmlMessages\SendXmlMessage\SendXmlMessage.cs" />
+    <Compile Include="Utilitys\HttpRequestHelper.cs" />
+    <Compile Include="Utilitys\JsonSerializerHelper.cs" />
     <Compile Include="Utilitys\Log.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utilitys\JsonSerializerHelper.cs" />
     <Compile Include="Utilitys\XmlHelper.cs" />
     <Compile Include="Utilitys\SignatureHelper.cs" />
-    <Compile Include="Utilitys\HttpRequestHelper.cs" />
-    <Compile Include="Core\WeiXinService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="WeiXin.Core.snk" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Core\access_token\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

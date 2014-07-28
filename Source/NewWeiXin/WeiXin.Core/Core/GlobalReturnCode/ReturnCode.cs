@@ -4,7 +4,7 @@ namespace WeiXin.Core
     /// <summary>
     /// 调用微信接口全局返回值结构
     /// </summary>
-    public struct ReturnCode
+    public class ReturnCode
     {
         /// <summary>
         /// 全局返回值
