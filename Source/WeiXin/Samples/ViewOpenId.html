@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>查看 OpenId</title>
+    <link href="Content/bootstrap-3.0.3/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div class="container">
+        <p>OpenId：<span id="openId"></span></p>
+        <p>OpenId 是用户针对公众账号的唯一值，可以用OpenId来识别用户。</p>
+        <hr />
+        <footer>
+            <p>&copy; 2014 - WangWenzhuang</p>
+        </footer>
+    </div>
+    <script src="Scripts/jquery-1.10.2.min.js"></script>
+    <script src="Content/bootstrap-3.0.3/js/bootstrap.min.js"></script>
+    <script>
+        function getQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        }
+        $(function () {
+            var openid = getQueryString("OpenId");
+            $("#openId").text(openid);
+        });
+    </script>
+</body>
+</html>
