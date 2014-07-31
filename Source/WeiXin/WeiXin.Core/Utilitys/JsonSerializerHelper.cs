@@ -44,7 +44,7 @@ namespace WeiXin.Core
             foreach (var p in tmpPros)
             {
                 var attributes = p.GetCustomAttributes(typeof(JsonPropertyAttribute), true);
-                if (attributes != null)
+                if (attributes != null && attributes.Length > 0)
                 {
                     JsonPropertyAttribute attribute = (JsonPropertyAttribute)attributes[0];
                     if (jsonObj.ContainsKey(attribute.PropertyName))

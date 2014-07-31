@@ -9,7 +9,14 @@ namespace WeiXin.Core
     {
         [JsonProperty("ticket")]
         public string Ticket { get; set; }
+        /// <summary>
+        /// 过期时间（秒单位）
+        /// </summary>
         [JsonProperty("expire_seconds")]
         public int ExpireSeconds { get; set; }
+        /// <summary>
+        /// 二维码图片 Url
+        /// </summary>
+        public string ImgUrl { get; set; }
     }
 }

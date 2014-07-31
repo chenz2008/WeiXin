@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Web;
 
 namespace WeiXin.Core
 {
@@ -7,7 +7,7 @@ namespace WeiXin.Core
         /// <summary>
         /// 创建临时带参数二维码
         /// </summary>
-        /// <param name="scene_id">参数值</param>
+        /// <param name="sceneId">参数值</param>
         /// <param name="accessToken"></param>
         /// <returns></returns>
         internal static QRCodeInfo CreateQR_SCENE(long sceneId, string accessToken)
@@ -19,7 +19,7 @@ namespace WeiXin.Core
         /// <summary>
         /// 创建永久带参数二维码
         /// </summary>
-        /// <param name="scene_id">参数值</param>
+        /// <param name="sceneId">参数值</param>
         /// <param name="accessToken"></param>
         /// <returns></returns>
         internal static QRCodeInfo CreateQR_LIMIT_SCEN(long sceneId, string accessToken)
@@ -40,8 +40,8 @@ namespace WeiXin.Core
             {
                 throw new WeixinRequestApiException(string.Format("创建二维码失败\r\n全局返回值：{0}\r\n对应说明：{1}\r\nJson：{2}\r\n请求路径：{3}", returnCode.ErrCode, returnCode.Msg, returnCode.Json, url), returnCode);
             }
-            var jsonObj = JsonSerializerHelper.Deserialize(resultJson);
-            var qrCodeInfo = JsonSerializerHelper.ConvertJsonStringToObjectByJsonPropertyAttribute<QRCodeInfo>(json);
+            var qrCodeInfo = JsonSerializerHelper.ConvertJsonStringToObjectByJsonPropertyAttribute<QRCodeInfo>(resultJson);
+            qrCodeInfo.ImgUrl = string.Format("https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket={0}", HttpUtility.UrlDecode(qrCodeInfo.Ticket));
             return qrCodeInfo;
         }
     }
