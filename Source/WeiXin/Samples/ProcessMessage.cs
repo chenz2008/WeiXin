@@ -178,7 +178,7 @@ namespace Samples
                 var sendMsg = new SendXmlTextMessage();
                 sendMsg.ToUserName = receiveMsg.FromUserName;
                 sendMsg.FromUserName = receiveMsg.ToUserName;
-                sendMsg.Content = string.Format("<a href=\"http://112.126.67.94/testapi/ViewOpenId.html?OpenId={0}\">获取OpenId</a>", receiveMsg.FromUserName);
+                sendMsg.Content = string.Format("<a href=\"http://112.126.67.94/wxtest/ViewOpenId.html?OpenId={0}\">获取OpenId</a>", receiveMsg.FromUserName);
                 result = sendMsg.ToXml();
             }
             else if (eventMsg.EventKey.Equals("9"))
@@ -186,7 +186,7 @@ namespace Samples
                 var sendMsg = new SendXmlTextMessage();
                 sendMsg.ToUserName = receiveMsg.FromUserName;
                 sendMsg.FromUserName = receiveMsg.ToUserName;
-                sendMsg.Content = string.Format("OAuth2.0授权分两种，第一种获取获取 OpenId，不弹出授权界面；第二种弹出授权界面，不但能获取 OpenId，还可以获取用户的信息。\r\n<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid={0}&redirect_uri=http%3a%2f%2f112.126.67.94%2ftestapi%2fOAuth2_snsapi_base.aspx&response_type=code&scope=snsapi_base&state=0#wechat_redirect\">第一种</a>\r\n<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid={0}&redirect_uri=http://112.126.67.94/testapi/OAuth2_snsapi_userinfo.aspx&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect\">第二种</a>", WeiXinConfig.AppId);
+                sendMsg.Content = string.Format("OAuth2.0授权分两种，第一种获取获取 OpenId，不弹出授权界面；第二种弹出授权界面，不但能获取 OpenId，还可以获取用户的信息。\r\n<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid={0}&redirect_uri=http%3a%2f%2f112.126.67.94%2fwxtest%2fOAuth2_snsapi_base.aspx&response_type=code&scope=snsapi_base&state=0#wechat_redirect\">第一种</a>\r\n<a href=\"https://open.weixin.qq.com/connect/oauth2/authorize?appid={0}&redirect_uri=http://112.126.67.94/wxtest/OAuth2_snsapi_userinfo.aspx&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect\">第二种</a>", WeiXinConfig.AppId);
                 result = sendMsg.ToXml();
             }
             else if (eventMsg.EventKey.Equals("12"))

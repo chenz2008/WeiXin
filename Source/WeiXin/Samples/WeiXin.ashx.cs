@@ -35,7 +35,7 @@ namespace Samples
                     string xml = null;
                     using (var reader = new StreamReader(context.Request.InputStream))
                     {
-                        xml = HttpUtility.UrlDecode(reader.ReadToEnd());
+                        xml = reader.ReadToEnd();
                     }
                     if (!string.IsNullOrEmpty(xml))
                     {

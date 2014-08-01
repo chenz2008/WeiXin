@@ -14,19 +14,19 @@ namespace WeiXin.Core.Messages
             var result = string.Empty;
             if (!string.IsNullOrEmpty(Title))
             {
-                result += "\"title\":\"" + HttpUtility.UrlDecode(Title ?? string.Empty) + "\",";
+                result += "\"title\":\"" + (Title ?? string.Empty) + "\",";
             }
             if (!string.IsNullOrEmpty(Description))
             {
-                result += "\"description\":\"" + HttpUtility.UrlDecode(Description ?? string.Empty) + "\",";
+                result += "\"description\":\"" + (Description ?? string.Empty) + "\",";
             }
             if (!string.IsNullOrEmpty(Url))
             {
-                result += "\"url\":\"" + HttpUtility.UrlDecode(Url ?? string.Empty) + "\",";
+                result += "\"url\":\"" + (Url ?? string.Empty) + "\",";
             }
             if (!string.IsNullOrEmpty(PicUrl))
             {
-                result += "\"picurl\":\"" + HttpUtility.UrlDecode(PicUrl ?? string.Empty) + "\",";
+                result += "\"picurl\":\"" + (PicUrl ?? string.Empty) + "\",";
             }
             if (result.Length > 0)
             {

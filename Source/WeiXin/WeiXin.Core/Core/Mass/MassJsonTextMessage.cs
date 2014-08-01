@@ -14,7 +14,7 @@ namespace WeiXin.Core
         }
         public override string GetJson()
         {
-            string content = string.Format("\"content\":\"{0}\"", HttpUtility.UrlDecode(this.Content ?? string.Empty));
+            string content = string.Format("\"content\":\"{0}\"", (this.Content ?? string.Empty));
             return base.Json(content);
         }
     }

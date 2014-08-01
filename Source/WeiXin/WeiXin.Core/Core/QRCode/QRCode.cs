@@ -41,7 +41,7 @@ namespace WeiXin.Core
                 throw new WeixinRequestApiException(string.Format("创建二维码失败\r\n全局返回值：{0}\r\n对应说明：{1}\r\nJson：{2}\r\n请求路径：{3}", returnCode.ErrCode, returnCode.Msg, returnCode.Json, url), returnCode);
             }
             var qrCodeInfo = JsonSerializerHelper.ConvertJsonStringToObjectByJsonPropertyAttribute<QRCodeInfo>(resultJson);
-            qrCodeInfo.ImgUrl = string.Format("https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket={0}", HttpUtility.UrlDecode(qrCodeInfo.Ticket));
+            qrCodeInfo.ImgUrl = string.Format("https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket={0}", HttpUtility.UrlEncode(qrCodeInfo.Ticket));
             return qrCodeInfo;
         }
     }
