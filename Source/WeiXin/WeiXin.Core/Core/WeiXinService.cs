@@ -152,6 +152,14 @@ namespace WeiXin.Core
             var accessToken = AccessToken.GetAccessToken(_AppId, _AppSecret);
             Mass.SendMessage(accessToken, msg);
         }
+        /// <summary>
+        /// 获取 access_token
+        /// </summary>
+        /// <returns></returns>
+        public static string GetAccessToken()
+        {
+            return AccessToken.GetAccessToken(_AppId, _AppSecret);
+        }
         private static ReceiveXmlMessage ConvertReceiveXmlToReceiveXmlMessage(string receiveXml)
         {
             Dictionary<string, string> dictionary = XmlHelper.Read(receiveXml);
