@@ -130,7 +130,7 @@ namespace Samples
                     var sendMsg = new CustomerJsonTextMessage();
                     sendMsg.Touser = receiveMsg.FromUserName;
                     sendMsg.Content = "客服文本消息";
-                    WeiXinService.SendCustomerMessage(sendMsg);
+                    WeiXinService.SendCustomerMessage(sendMsg, WeiXinConfig.AppId, WeiXinConfig.AppSecret);
                 });
                 t.Start();
             }
@@ -145,7 +145,7 @@ namespace Samples
                     var url = "http://www.wangwenzhuang.com/";
                     sendMsg.Articles = new List<CustomerJsonArticleMessage>();
                     sendMsg.Articles.Add(new CustomerJsonArticleMessage { Title = title, Description = discription, PicUrl = "http://h.hiphotos.baidu.com/image/pic/item/c9fcc3cec3fdfc037d970d53d63f8794a5c2266a.jpg", Url = url });
-                    WeiXinService.SendCustomerMessage(sendMsg);
+                    WeiXinService.SendCustomerMessage(sendMsg, WeiXinConfig.AppId, WeiXinConfig.AppSecret);
                 });
                 t.Start();
             }
@@ -161,7 +161,7 @@ namespace Samples
                     sendMsg.Articles.Add(new CustomerJsonArticleMessage { Title = "客服多图文消息1", Description = discription, PicUrl = "http://h.hiphotos.baidu.com/image/pic/item/c9fcc3cec3fdfc037d970d53d63f8794a5c2266a.jpg", Url = url });
                     sendMsg.Articles.Add(new CustomerJsonArticleMessage { Title = "客服多图文消息2", Description = discription, PicUrl = "http://g.hiphotos.baidu.com/image/pic/item/55e736d12f2eb93895023c7fd7628535e4dd6fcb.jpg", Url = url });
                     sendMsg.Articles.Add(new CustomerJsonArticleMessage { Title = "客服多图文消息3", Description = discription, PicUrl = "http://e.hiphotos.baidu.com/image/pic/item/63d0f703918fa0ec8426f0f7249759ee3c6ddb63.jpg", Url = url });
-                    WeiXinService.SendCustomerMessage(sendMsg);
+                    WeiXinService.SendCustomerMessage(sendMsg, WeiXinConfig.AppId, WeiXinConfig.AppSecret);
                 });
                 t.Start();
             }
@@ -194,14 +194,14 @@ namespace Samples
                 Task t = new Task(() =>
                 {
                     // 获取已关注列表
-                    var openIds = WeiXinService.GetSubscribeUserList();
+                    var openIds = WeiXinService.GetSubscribeUserList(WeiXinConfig.AppId, WeiXinConfig.AppSecret);
                     if (openIds != null && openIds.Count > 0)
                     {
                         var discription = string.Empty;
                         // 获取已关注列表每个人的基本信息
                         for (int i = 0; i < openIds.Count; i++)
                         {
-                            var userInfo = WeiXinService.GetSubscribeUserInfo(openIds[i]);
+                            var userInfo = WeiXinService.GetSubscribeUserInfo(openIds[i], WeiXinConfig.AppId, WeiXinConfig.AppSecret);
                             if (i + 1 == openIds.Count)
                             {
                                 discription += string.Format("{0}、{1}", i + 1, userInfo.NickName);
@@ -217,7 +217,7 @@ namespace Samples
                         var url = "http://www.wangwenzhuang.com/";
                         sendMsg.Articles = new List<CustomerJsonArticleMessage>();
                         sendMsg.Articles.Add(new CustomerJsonArticleMessage { Title = title, Description = discription, Url = url });
-                        WeiXinService.SendCustomerMessage(sendMsg);
+                        WeiXinService.SendCustomerMessage(sendMsg, WeiXinConfig.AppId, WeiXinConfig.AppSecret);
                     }
                 });
                 t.Start();

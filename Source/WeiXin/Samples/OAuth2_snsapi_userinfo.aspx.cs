@@ -11,7 +11,7 @@ namespace Samples
             var state = Request.QueryString["state"];
             if (!string.IsNullOrEmpty(state) && !string.IsNullOrEmpty(code))
             {
-                var token = WeiXinService.GetOAuthAccessToken(code);
+                var token = WeiXinService.GetOAuthAccessToken(code, WeiXinConfig.AppId, WeiXinConfig.AppSecret);
                 var userInfo = WeiXinService.GetOAuthUserInfo(token.OpenId, token.AccessToken);
                 this.openId.Text = token.OpenId;
                 this.nickname.Text = userInfo.NickName;

@@ -22,7 +22,6 @@ namespace WeiXin.Core
 {
     public sealed class WeiXinService
     {
-        private static string _AppId, _AppSecret;
         private static IWeiXinService _Service;
         /// <summary>
         /// 注册微信服务
@@ -30,15 +29,13 @@ namespace WeiXin.Core
         /// <param name="service">服务接口</param>
         /// <param name="appId">appid</param>
         /// <param name="appSecret">appsecret</param>
-        public static void Register(IWeiXinService service, string appId, string appSecret)
+        public static void Register(IWeiXinService service)
         {
-            if (service == null || string.IsNullOrEmpty(appId) || string.IsNullOrEmpty(appSecret))
+            if (service == null)
             {
                 throw new WeiXinServiceException("参数不能为空或 null。");
             }
             _Service = service;
-            _AppId = appId;
-            _AppSecret = appSecret;
         }
         /// <summary>
         /// 微信服务器消息处理
@@ -80,9 +77,9 @@ namespace WeiXin.Core
         /// 发送客服消息
         /// </summary>
         /// <param name="msg">消息</param>
-        public static void SendCustomerMessage(CustomerJsonMessage msg)
+        public static void SendCustomerMessage(CustomerJsonMessage msg, string appId, string appSecret)
         {
-            var accessToken = AccessToken.GetAccessToken(_AppId, _AppSecret);
+            var accessToken = AccessToken.GetAccessToken(appId, appSecret);
             CustomerMessage.SendCustomerMessage(accessToken, msg);
         }
         /// <summary>
@@ -90,9 +87,9 @@ namespace WeiXin.Core
         /// </summary>
         /// <param name="code"></param>
         /// <returns></returns>
-        public static OAuth2AccessToken GetOAuthAccessToken(string code)
+        public static OAuth2AccessToken GetOAuthAccessToken(string code, string appId, string appSecret)
         {
-            return OAuth2.GetOAuthAccessToken(code, _AppId, _AppSecret);
+            return OAuth2.GetOAuthAccessToken(code, appId, appSecret);
         }
         /// <summary>
         /// OAuth 2.0 验证通过获取用户信息
@@ -108,9 +105,9 @@ namespace WeiXin.Core
         /// 获取已关注用户列表
         /// </summary>
         /// <returns></returns>
-        public static List<string> GetSubscribeUserList()
+        public static List<string> GetSubscribeUserList(string appId, string appSecret)
         {
-            var accessToken = AccessToken.GetAccessToken(_AppId, _AppSecret);
+            var accessToken = AccessToken.GetAccessToken(appId, appSecret);
             return UserManager.GetSubscribeUserList(accessToken);
         }
         /// <summary>
@@ -118,9 +115,9 @@ namespace WeiXin.Core
         /// </summary>
         /// <param name="openId"></param>
         /// <returns></returns>
-        public static UserInfo GetSubscribeUserInfo(string openId)
+        public static UserInfo GetSubscribeUserInfo(string openId, string appId, string appSecret)
         {
-            var accessToken = AccessToken.GetAccessToken(_AppId, _AppSecret);
+            var accessToken = AccessToken.GetAccessToken(appId, appSecret);
             return UserManager.GetSubscribeUserInfo(accessToken, openId);
         }
         /// <summary>
@@ -128,9 +125,9 @@ namespace WeiXin.Core
         /// </summary>
         /// <param name="sceneId">参数值</param>
         /// <returns></returns>
-        public static QRCodeInfo CreateQR_SCENE(long sceneId)
+        public static QRCodeInfo CreateQR_SCENE(long sceneId, string appId, string appSecret)
         {
-            var accessToken = AccessToken.GetAccessToken(_AppId, _AppSecret);
+            var accessToken = AccessToken.GetAccessToken(appId, appSecret);
             return QRCode.CreateQR_SCENE(sceneId, accessToken);
         }
         /// <summary>
@@ -138,27 +135,27 @@ namespace WeiXin.Core
         /// </summary>
         /// <param name="sceneId">参数值</param>
         /// <returns></returns>
-        public static QRCodeInfo CreateQR_LIMIT_SCEN(long sceneId)
+        public static QRCodeInfo CreateQR_LIMIT_SCEN(long sceneId, string appId, string appSecret)
         {
-            var accessToken = AccessToken.GetAccessToken(_AppId, _AppSecret);
+            var accessToken = AccessToken.GetAccessToken(appId, appSecret);
             return QRCode.CreateQR_LIMIT_SCEN(sceneId, accessToken);
         }
         /// <summary>
         /// 高级群发消息（根据 OpenId）
         /// </summary>
         /// <param name="msg"></param>
-        public static void SendMessage(MassJsonMessage msg)
+        public static void SendMessage(MassJsonMessage msg, string appId, string appSecret)
         {
-            var accessToken = AccessToken.GetAccessToken(_AppId, _AppSecret);
+            var accessToken = AccessToken.GetAccessToken(appId, appSecret);
             Mass.SendMessage(accessToken, msg);
         }
         /// <summary>
         /// 获取 access_token
         /// </summary>
         /// <returns></returns>
-        public static string GetAccessToken()
+        public static string GetAccessToken(string appId, string appSecret)
         {
-            return AccessToken.GetAccessToken(_AppId, _AppSecret);
+            return AccessToken.GetAccessToken(appId, appSecret);
         }
         private static ReceiveXmlMessage ConvertReceiveXmlToReceiveXmlMessage(string receiveXml)
         {

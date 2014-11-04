@@ -14,7 +14,7 @@ namespace Samples
         {
             _Service = new ProcessMessage();
             // 步骤2
-            WeiXinService.Register(_Service, WeiXinConfig.AppId, WeiXinConfig.AppSecret);
+            WeiXinService.Register(_Service);
 
             Log.Logger = new Logger();
             // 设置日记级别

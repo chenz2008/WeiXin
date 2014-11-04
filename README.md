@@ -72,7 +72,7 @@
 *2、注册实现的接口*
 
 ```csharp
-	WeiXinService.Register(_Service, appid, appsecret);
+	WeiXinService.Register(_Service);
 ```	
 
 *3、处理微信服务器发来的 xml*
